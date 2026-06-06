@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Churn Prediction</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<link rel="stylesheet" href="{%static 'css/animate.css'%}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{%static 'style.css'%}"/>
+  <link rel="stylesheet" type="text/css" href="{%static 'tablestyle.css'%}"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<!-- Font Google -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container"> <h1>Churn Prediction Of Customer </h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="fas fa-bars"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"> <a class="nav-link" href="/userapp/UserHome">Home</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/userapp/predictchurn" >Predict Churn</a> </li>
+
+         <li class="nav-item"> <a class="nav-link" href="/userapp/login" >Logout </a> </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- End Navbar -->
+<!-------Banner Start------->
+<section class="banner" data-scroll-index='0'>
+  <div class="banner-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+          <div class="banner-text">
+            <h2 class="white">Churn Prediction of Customer</h2>
+            <h6 class="white">in Telecom using Machine Learning</h6>
+              <ul>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12"> <img src="{%static 'images/iphone-screen.png'%}" class="img-fluid wow fadeInUp"/> </div>
+      </div>
+    </div>
+  </div>
+  <span class="svg-wave"> <img class="svg-hero" src="{%static 'images/applight-wave.svg'%}"> </span> </section>
+
+<!-------Banner End------->
+
+<!-------About End------->
+
+<section class="about section-padding prelative" data-scroll-index='1'>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sectioner-header text-center">
+          <h3>Enter test data to predict churn</h3>
+          <span class="line"></span>
+          <center>
+            <font color="red">{{data}}</font>
+            <form action="/userapp/PredAction" method="post">
+               {%csrf_token%}
+          <table>
+            <tr><th>Gender</th><td><select name="gender" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Female</option>
+              <option value="0">Male</option>
+            </select></td></tr>
+            <tr><th>Age</th><td><input type="number" name="age" required style="border:1px solid black;"></td></tr>
+           <tr><th>Married</th><td><select name="married" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+            <tr><th>Number of Dependents</th><td><input type="number" name="dependents" required style="border:1px solid black;"></td></tr>
+          <tr><th>Latitude</th><td><input type="text" name="latitude" required style="border:1px solid black;"></td></tr>
+          <tr><th>Longitude</th><td><input type="text" name="Longitude"  style="border:1px solid black;" required></td></tr>
+            <tr><th>Number of Referrals</th><td><input type="number" name="referrals" required style="border:1px solid black;"></td></tr>
+          <tr><th>Tenure in Months</th><td><input type="number" name="tenure"  style="border:1px solid black;" required></td></tr>
+
+          <tr><th>Phone Service</th><td><select name="phone_service" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+<tr><th>Avg Monthly Long Distance Charges</th><td><input type="number" name="long_distance"  style="border:1px solid black;" required></td></tr>
+<tr><th>Multiple Lines</th><td><select name="multiple_lines" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+     <tr><th>Internet Service</th><td><select name="internet_service" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+     <tr><th>Internet Type</th><td><select name="internet_type" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="0">Fiber Optic</option>
+              <option value="1">DSL</option>
+              <option value="2">Cable</option>
+            </select></td></tr>
+
+         <tr><th>Avg Monthly GB Download</th><td><input type="number" name="avg_download"  style="border:1px solid black;" required></td></tr>
+
+             <tr><th>Online Security</th><td><select name="online_security" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+             <tr><th>Online Backup</th><td><select name="online_backup" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+             <tr><th>Device Protection Plan</th><td><select name="device_protection" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+            <tr><th>Streaming TV</th><td><select name="Streaming_TV" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+            <tr><th>Streaming Movies</th><td><select name="Streaming_Movies" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+            <tr><th>Streaming Music</th><td><select name="Streaming_Music" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+            <tr><th>Unlimited Data</th><td><select name="unlimited_data" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+            <tr><th>Contract</th><td><select name="Contract" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="0">Month-to-Month</option>
+              <option value="1">One Year</option>
+               <option value="2">Two Year</option>
+            </select></td></tr>
+
+            <tr><th>Paperless Billing</th><td><select name="Paperless_Billing" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select></td></tr>
+
+            <tr><th>Payment Method</th><td><select name="Payment_Method" required style="border:1px solid black;width:205px;border-radius:50px;height:40px;">
+              <option></option>
+              <option value="0">Bank Withdrawal</option>
+              <option value="1">Credit Card</option>
+               <option value="2">Mailed Check</option>
+            </select></td></tr>
+
+
+             <tr><th>Monthly Charge</th><td><input type="number" name="Monthly_Charge" required style="border:1px solid black;"></td></tr>
+          <tr><th>Total Charges</th><td><input type="number" name="Total_Charges" required style="border:1px solid black;"></td></tr>
+          <tr><th>Total Refunds</th><td><input type="number" name="Total_Refunds"  style="border:1px solid black;" required></td></tr>
+            <tr><th>Total Extra Data Charges</th><td><input type="number" name="extra_charge" required style="border:1px solid black;"></td></tr>
+          <tr><th>Total Long Distance Charges</th><td><input type="number" name="long_distance"  style="border:1px solid black;" required></td></tr>
+       <tr><th>Total Revenue</th><td><input type="number" name="Total_Revenue"  style="border:1px solid black;" required></td></tr>
+
+          <tr><th></th><td><input type="submit" value="Predict" required>
+          <input type="reset" value="Reset" required></td></tr>
+
+        </table>
+              </form>
+            </center>
+
+
+        </div>
+        <div class="section-content text-center">
+          <div class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+          </div>
+           </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-------About End------->
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<!-- scrollIt js -->
+<script src="{%static 'js/scrollIt.min.js'%}"></script>
+<script src="{%static 'js/wow.min.js'%}"></script>
+<script>
+	wow = new WOW();
+	wow.init();
+$(document).ready(function(e) {
+
+	$('#video-icon').on('click',function(e){
+	e.preventDefault();
+	$('.video-popup').css('display','flex');
+	$('.iframe-src').slideDown();
+	});
+	$('.video-popup').on('click',function(e){
+	var $target = e.target.nodeName;
+	var video_src = $(this).find('iframe').attr('src');
+	if($target != 'IFRAME'){
+	$('.video-popup').fadeOut();
+	$('.iframe-src').slideUp();
+	$('.video-popup iframe').attr('src'," ");
+	$('.video-popup iframe').attr('src',video_src);
+	}
+	});
+
+	$('.slider').bxSlider({
+	pager: false
+	});
+});
+
+$(window).on("scroll",function () {
+
+	var bodyScroll = $(window).scrollTop(),
+	navbar = $(".navbar");
+
+	if(bodyScroll > 50){
+	$('.navbar-logo img').attr('src','images/logo-black.png');
+	navbar.addClass("nav-scroll");
+
+}else{
+	$('.navbar-logo img').attr('src','images/logo.png');
+	navbar.removeClass("nav-scroll");
+}
+
+});
+$(window).on("load",function (){
+	var bodyScroll = $(window).scrollTop(),
+	navbar = $(".navbar");
+
+	if(bodyScroll > 50){
+	$('.navbar-logo img').attr('src','images/logo-black.png');
+	navbar.addClass("nav-scroll");
+	}else{
+	$('.navbar-logo img').attr('src','images/logo-white.png');
+	navbar.removeClass("nav-scroll");
+	}
+
+	$.scrollIt({
+
+	easing: 'swing',      // the easing function for animation
+	scrollTime: 900,       // how long (in ms) the animation takes
+	activeClass: 'active', // class given to the active nav element
+	onPageChange: null,    // function(pageIndex) that is called when page is changed
+	topOffset: -63
+	});
+});
+
+</script>
+</body>
+</html>
